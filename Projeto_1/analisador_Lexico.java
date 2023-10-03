@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class analisador_Lexico {
+public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
     public static void main(String[] args) throws Exception {
     	 String caminho = "/home/isadoravrx/compiladores/Projeto_1/in3.txt";
          String input;
