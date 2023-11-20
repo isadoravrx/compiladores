@@ -64,7 +64,7 @@ declaracaoEstrutura: 'struct' ID '{' declaracaoVariavel* '}';
 array: ID '[' expressao ']'
      | ID '[' ']';
 
-arrayinicializacao : '{'  '}';
+arrayinicializacao : '{' expressaoLista '}';
 
 expressaoLogica: expressaoRelacional
                | expressaoLogica '&&' expressaoRelacional
@@ -99,8 +99,10 @@ expressaoPostfix: primaria
               | primaria '.' ID
               | primaria '->' ID;
 
-argumentos: 
+argumentos: expressaoLista
          | ;
+         
+expressaoLista : ;
 
 primaria: ID
         | NUM_INT
