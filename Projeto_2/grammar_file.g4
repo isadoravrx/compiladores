@@ -26,7 +26,7 @@ bloco: '{' declaracao* '}';
 comentario: '//' ~('\r' | '\n')* '\r'? '\n';
 
 expressao: atribuicao
-        | expressaologica;
+        | expressaoLogica;
 
 atribuicao: ID '=' expressao
           | ID '+=' expressao
@@ -49,10 +49,10 @@ estruturaControle: 'if' '(' expressao ')' bloco
                 | 'if' '(' expressao ')' bloco 'else' bloco
                 | 'while' '(' expressao ')' bloco
                 | 'for' '(' expressao ';' expressao ';' expressao ')' bloco
-                | 'switch' '(' expressao ')' caseLista;
+                | 'switch' '(' expressao ')' caseLista
                 | 'break' ';'
                 | 'continue' ';'
-                | 'return' expressao ';'
+                | 'return' expressao ';';
 
 caseLista: caseDecl*;
 
@@ -64,7 +64,7 @@ declaracaoEstrutura: 'struct' ID '{' declaracaoVariavel* '}';
 array: ID '[' expressao ']'
      | ID '[' ']';
 
-arrayinicializacao : '{' ExpressaoLista '}';
+arrayinicializacao : '{'  '}';
 
 expressaoLogica: expressaoRelacional
                | expressaoLogica '&&' expressaoRelacional
@@ -99,7 +99,7 @@ expressaoPostfix: primaria
               | primaria '.' ID
               | primaria '->' ID;
 
-argumentos: expressaoLista
+argumentos: 
          | ;
 
 primaria: ID
