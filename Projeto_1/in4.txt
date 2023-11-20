@@ -1,0 +1,6 @@
+int main() {
+ int numero1 = 123;
+ int numero2 = 456;
+ int resultado = numero1 + numero2;
+ return resultado;
+}

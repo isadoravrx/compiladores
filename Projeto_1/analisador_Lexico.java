@@ -7,7 +7,7 @@ import java.util.List;
 
 public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
     public static void main(String[] args) throws Exception {
-    	 String caminho = "/home/isadoravrx/compiladores/Projeto_1/in3.txt";
+    	 String caminho = "/home/isadoravrx/compiladores/Projeto_1/in8.txt";
          String input;
         
         try {
@@ -18,13 +18,13 @@ public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
         }
     }
         public static void compiler(String input) throws Exception {
-        List<String> PV = Arrays.asList("int", "float", "char", "boolean"+
-                    "void", "if", "else", "for", "while", "scanf"+
-                    "println", "main", "return", "abstract","volatile"+
-                    "assert","break","byte","case","catch", "class"+
-                    "const","continue","default","do","double","extends"+
-                    "final","finally","goto","implements","import","instanceof","interface"+
-                    "long","native","new","packge","private","protected","public","short","static"+
+        List<String> PV = Arrays.asList("println","int", "float", "char", "boolean",
+                    "void", "if", "else", "for", "while", "scanf",
+                    "main", "return", "abstract","volatile",
+                    "assert","break","byte","case","catch", "class",
+                    "const","continue","default","do","double","extends",
+                    "final","finally","goto","implements","import","instanceof","interface",
+                    "long","native","new","packge","private","protected","public","short","static",
                     "strictfp","super","switch","synchronized","this","Scanner","throw","throws","transient","try","void");
         
         List<String> Op = Arrays.asList("+", "-", "*", "/", "=", ">", "<", "==", "!=", ">=", "<=", "%", "&&", "||", "!");
@@ -37,16 +37,12 @@ public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
         List<String> id = new ArrayList<>();
         List<String> textos = new ArrayList<>();
         
-        String[] tokens = input.split("\\s+|(?<=[\r\n])|"+
-        "(?<=[;])|(?=[;])|(?<=[,])|(?=[,])|(?<=[\\(\\)])|"+
-        		"(?=[\\(\\)])|(?<=[\\[\\]])|(?=[\\[\\]])|"+
-        "(?<=[\\{\\}])|(?=[\\{\\}])|(?<=[+\\-*/=><==!=>=<=%&&||!])|"+
-        		"(?=[+;\\-*/=><==!=>=<=%&&||!])");
+        String[] tokens = input.split("\\s+|(?<=[\r\n])|(?<=[;])|(?=[;])|(?<=[,])|(?=[,])|(?<=[\\(\\)])|(?=[\\(\\)])|(?<=[\\[\\]])|(?=[\\[\\]])|(?<=[\\{\\}])|(?=[\\{\\}])|(?<=[+\\-*/=><==!=>=<=%&&||!])|(?=[+;\\-*/=><==!=>=<=%&&||!])");
           /*
           \\s+ é para separar entre espaços
           \r\n é enter
-          (?<=[]) é um lookbehind, ele separa tudas as condições dentro do [] que vem depois da String
-          (?<=[]) é um lookhead, ele separa tudas as condições dentro do [] que vem antes da String 
+           (?<=[;]) é um lookbehind, ele separa tudas as condições dentro do [] que vem depois da String
+          (?=[]) é um lookhead, ele separa tudas as condições dentro do [] que vem antes da String 
           */
         
         int i;
@@ -61,7 +57,6 @@ public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
 	        		}
 	        		tokens[i] = tokens[i] + " " + tokens[k];
         			tokens[k] = "";
-	        		break;
 	        }
         }
       //Juntando Strings de comentarios múltiplas linhas
@@ -93,9 +88,9 @@ public class analisador_Lexico { //grupo : Isadora Vitória e Zhihang Lin
 	        }
         }
         //imprimindo cada casa de vetor para checar se separou tudo que pedi corretamente
-        for(int j = 0; j<= tokens.length -1; j++) {
-        	System.out.println(tokens[j]);
-        }
+        //for(int j = 0; j<= tokens.length -1; j++) {
+        	//System.out.println(tokens[j]);
+        //}
         //verificando e armazenando os tokens em suas listas especificas
         for (String token : tokens) {
             if (!token.isEmpty()) {

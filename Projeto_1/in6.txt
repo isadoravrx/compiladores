@@ -1,0 +1,6 @@
+void saudacao() {
+ char mensagem[] = "Olá, mundo!";
+ int numero = 42;
+ println(mensagem);
+ println("O número é: " + numero);
+}
