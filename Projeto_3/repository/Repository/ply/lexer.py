@@ -2,7 +2,8 @@ from ply import lex
 
 # Lista de tokens
 tokens = (
-    'NUMBER',
+    'NUM_INT',
+    'NUM_DEC',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -52,10 +53,8 @@ tokens = (
     'RETURN',
     'STRUCT',
     'ID'
+    'TIPO'
 )
-
-#como vou identificar os ids?? E OS NUMEROS?? NUM INT E NUM DEC?? E TEXTOS??
-
 
 # Regras para cada token
 t_PLUS = r'\+'
@@ -107,15 +106,20 @@ t_RETURN = r'return'
 t_STRUCT = r'struct'
 
 
-tip = {
+tipos = {  
     'int',  'float', 'double', 'char', 'boolean'
 }
 
-#com outras, retorna         E ISSO???? QUAIS AS OUTRAS QUE RETORNAVAM??
+def t_TIPO(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = tipos.get(t.value, 'TIPO')
+    return t
+#com outras, retorna         
+
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = palavras_reservadas.get(t.value, 'ID')  # Verificar palavras reservadas
+    t.type = palavras_resevadas.get(t.value, 'ID')  # Verificar palavras reservadas
     return t
 
 palavras_resevadas = {'if': 'IF','while': 'WHILE','for': 'FOR','switch': 'SWITCH',
@@ -124,17 +128,23 @@ palavras_resevadas = {'if': 'IF','while': 'WHILE','for': 'FOR','switch': 'SWITCH
 }
 
 
-# Regra para números            ISSO TA CERTO?????
-def t_NUMBER(t):
+# Regra para números inteiros (NUM_INT)
+def t_NUM_INT(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
+# Regra para números decimais (NUM_DEC)
+def t_NUM_DEC(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
 
 def t_COMENTARIO(t):
     r'//.*|/\*.*?\*/'
     pass
     t.lexer.lineno += t.value.count("\n")
+
 # Ignorar caracteres em branco
 t_ignore = ' \t'
 
