@@ -49,6 +49,7 @@ def p_parametro(p):
 def p_bloco(p):
     """
     bloco : LCHAVE declaracao RCHAVE
+            | LCHAVE
     """
 
 
@@ -61,7 +62,7 @@ def p_expressao(p):
     """
     expressao : expressaoLogica
                 | atribuicao 
-                | estruturadecontrole          
+                | estruturacontrole          
     """
 def p_atribuicao(p):
     """
@@ -83,9 +84,9 @@ def p_atribuicao(p):
                     | ID ORIGUAL ID
     """
 
-def p_estrutura_controle(p):
+def p_estruturacontrole(p):
     """
-    estruturaControle : IF LPAREN expressao RPAREN bloco
+    estruturacontrole : IF LPAREN expressao RPAREN bloco
                      | IF LPAREN expressao RPAREN bloco ELSE bloco
                      | WHILE LPAREN expressao RPAREN bloco
                      | FOR LPAREN expressao PONTOV expressao PONTOV expressao RPAREN bloco
@@ -125,6 +126,12 @@ def p_expressaoLogica(p):
                     | expressaoLogica AND expressaoRelacional
                     | expressaoLogica OR expressaoRelacional
                     | EXCLAMACAO expressaoRelacional
+                    | ID MAIOR ID
+                    | ID MENOR ID
+                    | ID MAIORIGUAL ID
+                    | ID MENORIGUAL ID
+                    | ID DIFERENTE ID
+                    | ID IGUALIGUAL ID
     """
 
 def p_expressaoRelacional(p):
@@ -145,6 +152,7 @@ def p_expressaoAritmetica(p):
     expressaoAritmetica : expressaoMultiplicativa
                         | expressaoMultiplicativa PLUS expressaoMultiplicativa
                         | expressaoMultiplicativa MINUS expressaoMultiplicativa
+                        | 
     """
 
 
@@ -188,6 +196,7 @@ def p_primaria(p):
     primaria : ID
             | NUM_INT
             | NUM_DEC
+            | TEXTO
             | LPAREN expressao RPAREN
     """
 

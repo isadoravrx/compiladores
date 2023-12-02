@@ -128,7 +128,6 @@ palavras_resevadas = {'if': 'IF','while': 'WHILE','for': 'FOR','switch': 'SWITCH
     'return': 'RETURN', 'struct': 'STRUCT',
 }
 
-
 # Regra para números inteiros (NUM_INT)
 def t_NUM_INT(t):
     r'\d+'
@@ -140,6 +139,7 @@ def t_NUM_DEC(t):
     r'\d+\.\d+'
     t.value = float(t.value)
     return t
+
 
 def t_COMENTARIO(t):
     r'//.*|/\*.*?\*/'
