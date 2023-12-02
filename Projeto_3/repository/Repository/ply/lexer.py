@@ -14,13 +14,13 @@ tokens = (
     'EQUALS',
     'VIRGULA',  
     'LCOCHETES',
-    'RCOCHETES'
+    'RCOCHETES',
     'RETIC',
     'COMENTARIO',
-    'MAISIGUAL'
-    'MENOSIGUAL'
-    'VEZESIGUAL'
-    'BARRAIGUAL'
+    'MAISIGUAL',
+    'MENOSIGUAL',
+    'VEZESIGUAL',
+    'BARRAIGUAL',
     'MODIGUAL',
     'ANDIGUAL',
     'ORIGUAL',
@@ -38,11 +38,12 @@ tokens = (
     'DIFERENTE',
     'IGUALIGUAL',
     'MOD',
-    'MAISMAIS'
+    'MAISMAIS',
     'MENOSMENOS',
     'PONTO',
     'SETA',
     'IF',
+    'ELSE',
     'WHILE',
     'FOR',
     'SWITCH',
@@ -52,8 +53,9 @@ tokens = (
     'CONTINUE',
     'RETURN',
     'STRUCT',
-    'ID'
-    'TIPO'
+    'ID',
+    'TIPO',
+    'TEXTO'
 )
 
 # Regras para cada token
@@ -95,6 +97,7 @@ t_MENOSMENOS = r'--'
 t_PONTO = r'\.'
 t_SETA = r'->'
 t_IF = r'if'
+t_ELSE = r'else'
 t_WHILE = r'while'
 t_FOR = r'for'
 t_SWITCH = r'switch'
@@ -106,20 +109,18 @@ t_RETURN = r'return'
 t_STRUCT = r'struct'
 
 
-tipos = {  
-    'int',  'float', 'double', 'char', 'boolean'
-}
-
 def t_TIPO(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = tipos.get(t.value, 'TIPO')
+    r'int|float|double|char|boolean'
     return t
 #com outras, retorna         
 
+def t_TEXTO(t):
+    r'"[^"]*"'
+    return t
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = palavras_resevadas.get(t.value, 'ID')  # Verificar palavras reservadas
+    t.value = palavras_resevadas.get(t.value, 'ID')  # Verificar palavras reservadas
     return t
 
 palavras_resevadas = {'if': 'IF','while': 'WHILE','for': 'FOR','switch': 'SWITCH',

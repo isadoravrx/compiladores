@@ -1,6 +1,6 @@
 from ply import yacc
 from lexer import tokens
-
+                                        #falta colocar as estrelas
 
 # Regras de produção
 def p_programa(p):
@@ -19,18 +19,13 @@ def p_declaracao(p):
     """
 
 
-def p_declaracaoVariavel(p):
+def p_declaracaoVariavel(p): 
     """
     declaracaoVariavel : TIPO ID PONTOV
                         | TIPO ID EQUALS expressao PONTOV
                         | TIPO array PONTOV
-                        | TIPO array EQUALS TEXTO PONTOV
+                        | TIPO array EQUALS TEXTO PONTOV  
     """
-
-
-def p_array(p):
-    """array : ID LCOCHETES RCOCHETES"""
-
 
 def p_declaracaoFuncao(p):
     """
@@ -40,19 +35,16 @@ def p_declaracaoFuncao(p):
 
 def p_parametros(p):
     """
-    parametros : PARAMETRO
-                | PARAMETRO VIRGULA parametros
-                | TIPO ID
+    parametros : parametro
+                | parametro VIRGULA parametros
+    """
+
+def p_parametro(p):
+    """
+    parametro :  TIPO ID
                 | TIPO ID LCOCHETES RCOCHETES
                 | TIPO RETIC ID
     """
-
-
-def p_comentario(p):
-    """
-    comentario : COMMENT
-    """
-
 
 def p_bloco(p):
     """
@@ -60,17 +52,78 @@ def p_bloco(p):
     """
 
 
+def p_comentario(p):
+    """
+    comentario : COMENTARIO
+    """
+
+def p_expressao(p):
+    """
+    expressao : expressaoLogica
+                | atribuicao 
+                | estruturadecontrole          
+    """
+def p_atribuicao(p):
+    """
+        atribuicao : ID EQUALS expressao
+                    | ID MAISIGUAL expressao
+                    | ID MENOSIGUAL expressao
+                    | ID VEZESIGUAL expressao
+                    | ID BARRAIGUAL expressao
+                    | ID MODIGUAL expressao
+                    | ID ANDIGUAL expressao
+                    | ID ORIGUAL expressao
+                    | ID EQUALS ID
+                    | ID MAISIGUAL ID
+                    | ID MENOSIGUAL ID
+                    | ID VEZESIGUAL ID
+                    | ID BARRAIGUAL ID
+                    | ID MODIGUAL ID
+                    | ID ANDIGUAL ID
+                    | ID ORIGUAL ID
+    """
+
+def p_estrutura_controle(p):
+    """
+    estruturaControle : IF LPAREN expressao RPAREN bloco
+                     | IF LPAREN expressao RPAREN bloco ELSE bloco
+                     | WHILE LPAREN expressao RPAREN bloco
+                     | FOR LPAREN expressao PONTOV expressao PONTOV expressao RPAREN bloco
+                     | SWITCH LPAREN expressao RPAREN caseLista
+                     | BREAK PONTOV
+                     | CONTINUE PONTOV
+                     | RETURN expressao PONTOV
+    """
+
+def p_case_lista(p):
+    """
+    caseLista : case_decl caseLista
+              | 
+    """
+
+def p_case_decl(p):
+    """
+    case_decl : CASE expressao DOISPONTOS bloco
+             | DEFAULT DOISPONTOS bloco
+    """
+
 def p_declaracaoEstrutura(p):
     """
     declaracaoEstrutura : LCHAVE declaracaoVariavel RCHAVE PONTOV
     """
 
+def p_array(p):
+    """array : ID LCOCHETES expressao RCOCHETES
+               | ID LCOCHETES RCOCHETES
+    """
+
+
 
 def p_expressaoLogica(p):
     """
     expressaoLogica : expressaoRelacional
-                    | expressaoLogica OR expressaoRelacional
                     | expressaoLogica AND expressaoRelacional
+                    | expressaoLogica OR expressaoRelacional
                     | EXCLAMACAO expressaoRelacional
     """
 
@@ -85,11 +138,6 @@ def p_expressaoRelacional(p):
                         | expressaoAritmetica IGUALIGUAL expressaoAritmetica
     """
 
-
-def p_expressao(p):
-    """
-    expressao : expressaoLogica
-    """
 
 
 def p_expressaoAritmetica(p):
@@ -131,7 +179,7 @@ def p_expressaoPostfix(p):
 
 def p_argumentos(p):
     """
-    argumentos :
+    argumentos : 
     """
 
 
@@ -140,14 +188,12 @@ def p_primaria(p):
     primaria : ID
             | NUM_INT
             | NUM_DEC
-            | LPAREN expressao LPAREN
+            | LPAREN expressao RPAREN
     """
 
 
 # Manipulador de erros
 def p_error(p):
-    print(f"Erro de sintaxe: {p}")
-
-
+        print(f"Erro de sintaxe")
 # Criar o analisador sintático
 parser = yacc.yacc()
