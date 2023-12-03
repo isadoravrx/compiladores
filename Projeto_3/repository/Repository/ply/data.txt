@@ -1,5 +1,3 @@
-    int x = 2;
-    int y = 2;
-    if ( x == y ) {
-        return x;
-    }
+while(x > y){
+    ++x;
+}

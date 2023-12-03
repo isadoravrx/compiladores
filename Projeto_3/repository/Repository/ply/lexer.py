@@ -55,7 +55,8 @@ tokens = (
     'STRUCT',
     'ID',
     'TIPO',
-    'TEXTO'
+    'TEXTO',
+    'RESERVE'
 )
 
 # Regras para cada token
@@ -96,17 +97,6 @@ t_MAISMAIS = r'\+\+'
 t_MENOSMENOS = r'--'
 t_PONTO = r'\.'
 t_SETA = r'->'
-t_IF = r'if'
-t_ELSE = r'else'
-t_WHILE = r'while'
-t_FOR = r'for'
-t_SWITCH = r'switch'
-t_CASE = r'case'
-t_DEFAULT = r'default'
-t_BREAK = r'break'
-t_CONTINUE = r'continue'
-t_RETURN = r'return'
-t_STRUCT = r'struct'
 
 
 def t_TIPO(t):
@@ -118,15 +108,20 @@ def t_TEXTO(t):
     r'"[^"]*"'
     return t
 
+palavras_resevadas = {'if': 'IF','else' : 'ELSE', 'while': 'WHILE','for': 'FOR','switch': 'SWITCH',
+    'case': 'CASE','default': 'DEFAULT','break': 'BREAK','continue': 'CONTINUE',
+    'return': 'RETURN', 'struct': 'STRUCT',
+}
+
+def t_RESERVE(t):
+    r'if|while|for|else|switch|case|default|break|continue|return|struct'
+    t.type = palavras_resevadas.get(t.value, 'RESERVE')
+    return t
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.value = palavras_resevadas.get(t.value, 'ID')  # Verificar palavras reservadas
     return t
-
-palavras_resevadas = {'if': 'IF','while': 'WHILE','for': 'FOR','switch': 'SWITCH',
-    'case': 'CASE','default': 'DEFAULT','break': 'BREAK','continue': 'CONTINUE',
-    'return': 'RETURN', 'struct': 'STRUCT',
-}
 
 # Regra para números inteiros (NUM_INT)
 def t_NUM_INT(t):

@@ -2,11 +2,15 @@ from ply import yacc
 from lexer import tokens
                                         #falta colocar as estrelas
 
+row = 0
+s = ""
 # Regras de produção
 def p_programa(p):
     """
     programa : declaracao
             | declaracao programa
+            | RCHAVE
+            | LCHAVE
     """
 
 
@@ -16,6 +20,7 @@ def p_declaracao(p):
                 | declaracaoFuncao
                 | declaracaoEstrutura
                 | comentario
+                | estruturacontrole
     """
 
 
@@ -62,7 +67,7 @@ def p_expressao(p):
     """
     expressao : expressaoLogica
                 | atribuicao 
-                | estruturacontrole          
+                | estruturacontrole         
     """
 def p_atribuicao(p):
     """
@@ -74,14 +79,6 @@ def p_atribuicao(p):
                     | ID MODIGUAL expressao
                     | ID ANDIGUAL expressao
                     | ID ORIGUAL expressao
-                    | ID EQUALS ID
-                    | ID MAISIGUAL ID
-                    | ID MENOSIGUAL ID
-                    | ID VEZESIGUAL ID
-                    | ID BARRAIGUAL ID
-                    | ID MODIGUAL ID
-                    | ID ANDIGUAL ID
-                    | ID ORIGUAL ID
     """
 
 def p_estruturacontrole(p):
@@ -170,8 +167,8 @@ def p_expressaoUnaria(p):
     """
     expressaoUnaria : expressaoPostfix
                     | MINUS expressaoPostfix
-                    | PLUS PLUS expressaoPostfix
-                    | MINUS MINUS expressaoPostfix
+                    | MAISMAIS expressaoPostfix PONTOV
+                    | MENOSMENOS expressaoPostfix PONTOV
     """
 
 
@@ -200,9 +197,16 @@ def p_primaria(p):
             | LPAREN expressao RPAREN
     """
 
+def incrementar(s1):
+    global s 
+    s = s1
+    global row 
+    row += 1
 
 # Manipulador de erros
 def p_error(p):
-        print(f"Erro de sintaxe")
+        global row
+        print(f'Erro de sintaxe na linha {row} : "{s}"') 
+
 # Criar o analisador sintático
 parser = yacc.yacc()
