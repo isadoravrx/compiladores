@@ -11,6 +11,7 @@ def p_programa(p):
             | declaracao programa
             | RCHAVE
             | LCHAVE
+            | expressao
     """
 
 
@@ -63,28 +64,32 @@ def p_comentario(p):
     comentario : COMENTARIO
     """
 
+
 def p_expressao(p):
     """
     expressao : expressaoLogica
                 | atribuicao 
-                | estruturacontrole         
+                | estruturacontrole   
+                | expressaoAritmetica       
     """
+
 def p_atribuicao(p):
     """
-        atribuicao : ID EQUALS expressao
-                    | ID MAISIGUAL expressao
-                    | ID MENOSIGUAL expressao
-                    | ID VEZESIGUAL expressao
-                    | ID BARRAIGUAL expressao
-                    | ID MODIGUAL expressao
-                    | ID ANDIGUAL expressao
-                    | ID ORIGUAL expressao
+        atribuicao : ID EQUALS expressao PONTOV
+                    | ID MAISIGUAL expressao PONTOV
+                    | ID MENOSIGUAL expressao PONTOV
+                    | ID VEZESIGUAL expressao PONTOV
+                    | ID BARRAIGUAL expressao PONTOV
+                    | ID MODIGUAL expressao PONTOV 
+                    | ID ANDIGUAL expressao PONTOV
+                    | ID ORIGUAL expressao PONTOV
     """
 
 def p_estruturacontrole(p):
     """
     estruturacontrole : IF LPAREN expressao RPAREN bloco
                      | IF LPAREN expressao RPAREN bloco ELSE bloco
+                     | RCHAVE ELSE LCHAVE
                      | WHILE LPAREN expressao RPAREN bloco
                      | FOR LPAREN expressao PONTOV expressao PONTOV expressao RPAREN bloco
                      | SWITCH LPAREN expressao RPAREN caseLista
@@ -129,6 +134,12 @@ def p_expressaoLogica(p):
                     | ID MENORIGUAL ID
                     | ID DIFERENTE ID
                     | ID IGUALIGUAL ID
+                    | ID MAIOR NUM_INT
+                    | ID MENOR NUM_INT
+                    | ID MAIORIGUAL NUM_INT
+                    | ID MENORIGUAL NUM_INT
+                    | ID DIFERENTE NUM_INT
+                    | ID IGUALIGUAL NUM_INT
     """
 
 def p_expressaoRelacional(p):
