@@ -12,6 +12,7 @@ def p_programa(p):
             | RCHAVE
             | LCHAVE
             | expressao
+            | RCHAVE PONTOV
     """
 
 
@@ -56,6 +57,7 @@ def p_bloco(p):
     """
     bloco : LCHAVE declaracao RCHAVE
             | LCHAVE
+            | STRUCT ID LCHAVE
     """
 
 
@@ -70,7 +72,8 @@ def p_expressao(p):
     expressao : expressaoLogica
                 | atribuicao 
                 | estruturacontrole   
-                | expressaoAritmetica       
+                | expressaoAritmetica     
+                | bloco  
     """
 
 def p_atribuicao(p):

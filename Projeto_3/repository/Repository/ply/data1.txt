@@ -1,0 +1,13 @@
+//declaracao de variavel
+int contador;
+
+//declaracao de funcao com parametros e blocos
+
+double calcularMedia(int numero1, float numero2){
+    //bloco com declaracao e expressoes
+    double media;
+    media = (numero1 + numero2)/2;
+    return media;
+}   
+
+

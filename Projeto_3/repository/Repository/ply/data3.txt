@@ -1,0 +1,9 @@
+//declaracao de uma estrutura
+struct Ponto{
+    int x;
+    int y;
+};
+
+//comentario de uma linha
+//inicializacao de uma estrutura
+struct Ponto ponto1 = {10,20};

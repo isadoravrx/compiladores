@@ -5,7 +5,7 @@ import parser_1
 
 def main():
     data = ""
-    with open('data.txt', 'r') as arquivo:
+    with open('data2.txt', 'r') as arquivo:
         data = arquivo.read()
 
     codigo = [linha.strip() for linha in data.split('\n')]

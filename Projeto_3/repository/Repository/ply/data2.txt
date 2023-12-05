@@ -1,0 +1,10 @@
+//estrutura de controle com expressao logica
+ifcontador > 10){
+    contador = 0;
+}else{
+    contador += 1;
+}
+
+//uso de expressao aritmetrica
+int resultado;
+resultado = 5 * (3 + 2);
